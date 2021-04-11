@@ -5,7 +5,7 @@
                <md-card-media
                 md-ratio="16:9"
                >
-                <img :src="require(`../../assets/images/featured/${post.img}`)">
+                <img :src="`${post.img}`">
                </md-card-media>
                <md-card-header>
                    <h2 class="title">{{ post.title }}</h2>
@@ -30,12 +30,16 @@
 
 
 <script>
-import posts from '../../assets/posts.js'
 export default  { 
-    data(){
-        return { 
-            posts 
+    computed : {
+        posts(){ 
+            return this.$store.getters['getAllPost']
          }
-    }
+    },
+    created(){ 
+        this.$store.dispatch("getAllPost",{ 
+            limit: 3
+         })
+     }
  }
 </script>

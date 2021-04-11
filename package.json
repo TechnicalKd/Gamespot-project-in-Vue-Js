@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "validate": "^5.1.0",
     "vue": "^2.6.11",
     "vue-carousel": "^0.18.0",
     "vue-carrousel": "^1.0.5",
@@ -16,6 +17,8 @@
     "vue-resource": "^1.5.2",
     "vue-router": "^3.5.1",
     "vue-scroll-reveal": "^1.0.11",
+    "vue-wysiwyg": "^1.7.2",
+    "vuelidate": "^0.7.6",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
