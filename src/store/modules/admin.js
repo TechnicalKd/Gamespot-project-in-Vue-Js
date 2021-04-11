@@ -12,9 +12,13 @@ const admin = {
         authFailed: false,
         refrshLoading: true,
         addpost: false,
-        image_Upload: null
+        image_Upload: null,
+        getPost: null
     },
     getters: {
+        getAdminData(state) {
+            return state.getPost
+        },
         isAuth(state) {
             if (state.token) { return true }
             return false
@@ -25,7 +29,8 @@ const admin = {
 
         imageUpload(state) {
             return state.image_Upload
-        }
+        },
+
     },
     mutations: {
         refrshLoading(state) {
@@ -34,7 +39,9 @@ const admin = {
         addPost(state) {
             state.addpost = true
         },
-
+        getRandomPost(state, posts) {
+            state.getPost = posts
+        },
         authUser(state, authData) {
             state.token = authData.idToken
             state.refresh = authData.refreshToken
@@ -69,12 +76,35 @@ const admin = {
 
     },
     actions: {
+        deletePost({ commit, state }, payload) {
+            Vue.http.delete(`posts/${payload}.json?auth=${state.token}`)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                })
+        },
         addPost({ commit, state }, payload) {
             Vue.http.post(`posts.json?auth=${state.token}`, payload)
                 .then(response => response.json())
                 .then(authData => {
                     commit("addPost")
                 })
+        },
+        getAdminPosts({ commit }) {
+            Vue.http.get('posts.json')
+                .then(response => response.json())
+                .then(response => {
+
+                    const posts = [];
+                    for (let key in response) {
+                        posts.push({
+                            ...response[key],
+                            id: key
+                        })
+                    }
+                    commit('getRandomPost', posts.reverse())
+                })
+
         },
         imageUpload({ commit }, file) {
             const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/kdtech-software-solution/image/upload';

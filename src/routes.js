@@ -8,6 +8,8 @@ import store from './store/store'
 import AddPost from './components/Dashboard/addPost.vue'
 import ViewPost from './components/Dashboard/listPost.vue'
 import MainDashboard from './components/Dashboard/main.vue'
+import postAll from './components/post/post.vue'
+import notFound from './components/404/index'
 
 
 Vue.use(vueRouter)
@@ -18,8 +20,6 @@ const authGuard = {
         } else {
             next('/')
         }
-
-
     }
 }
 
@@ -35,7 +35,9 @@ const routes = [
             { path: 'all_post', component: ViewPost }
         ],
         ...authGuard
-    }
+    },
+    { path: '/posts/:id', component: postAll },
+    { path: '*', component: notFound }
 
 ];
 

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './routes'
 import Button from './components/ui/button.vue'
-import { MdCard, MdButton, MdDialog, MdContent } from 'vue-material/dist/components'
+import { MdCard, MdButton, MdDialog, MdContent, MdTable, MdDialogConfirm } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import vueResouce from 'vue-resource'
@@ -12,6 +12,10 @@ import wysiwyg from "vue-wysiwyg";
 
 
 Vue.use(MdCard)
+
+Vue.use(MdTable)
+Vue.use(MdDialogConfirm)
+
 Vue.use(MdButton)
 Vue.use(MdDialog)
 Vue.use(MdContent)
